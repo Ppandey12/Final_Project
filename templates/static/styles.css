@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    display: flex;
+    padding: 0 15px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4680d6, #38878d);
+    /* margin-top: 50px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+.display_text {
+    font-size: 30px;
+    color: #333;
+    margin: 20px;
+}
+
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+.wrapper {
+    width: 600px;
+    padding: 40px;
+    background: #000000;
+    border-radius: 10px;
+}
+
+.wrapper .input_field {
+    opacity: 0;
+    z-index: -100;
+    position: absolute;
+}
+
+.wrapper .contentBox {
+    padding: 12px 20px 0;
+    border-radius: 5px;
+    border: 4px solid blue;
+
+}
+
+.typingText {
+    overflow: hidden;
+    max-height: 250px;
+}
+
+
+.typingText::-webkit-scrollbar {
+    width: 0px;
+}
+
+.typingText p {
+    font-size: 20px;
+    text-align: justify;
+    letter-spacing: 1px;
+    word-break: break-all;
+    color: white;
+}
+
+.typingText p span {
+    position: relative;
+
+}
+
+.typingText p span.correct {
+    color: white;
+}
+
+.typingText p span.incorrect {
+    color: red;
+    border-radius: 3px;
+
+}
+
+.typingText p span.active::before {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    border-radius: 5px;
+    background: #007acc;
+    animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 1;
+    }
+}
+
+.content {
+    color: white;
+    margin-top: 17px;
+    display: flex;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 3px solid #007acc;
+}
+
+.content button {
+    outline: none;
+    border: none;
+    width: 105px;
+    color: #007acc;
+    padding: 8px 0;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 3px solid #007acc;
+    background: none;
+    transition: transform 0.2s ease;
+}
+
+.content button:active {
+    transform: scale(0.89);
+}
+
+.content button:hover {
+    background: #FFFFFF;
+}
+
+
+.content .result {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: calc(100% - 140px);
+    justify-content: space-between;
+}
+
+.content .result li {
+    display: flex;
+    height: 20px;
+    list-style: none;
+    position: relative;
+    align-items: center;
+}
+
+.content .result li:not(:first-child) {
+    padding-left: 22px;
+    border-left: 2px solid #bfbfbf;
+}
+
+
+.content .result li p {
+    font-size: 15px;
+}
+
+/* .content .result li span {
+    display: block;
+    font-size: 13px;
+    margin-left: 10px;
+} */
+
+
+li span b {
+    font-weight: 500;
+}
+
+li:not(:first-child) span {
+    font-weight: 500;
+}
