@@ -16,39 +16,62 @@
 
         <div class="home">
             <a href="/homepage"><button class="playbutton">homepage</button></a>
+            <a href="/singleword"><button class="playbutton">Speed Typing</button></a>
+            <a href="/leaderboard"><button class="leaderboardbutton">Leaderboard</button></a>
         </div>
 
 
 
         <div class="wrapper">
 
+            <!-- START SCREEN -->
+            <div class="startScreen" id="startScreen">
+                <h1>Typing Game</h1>
+                <button id="startBtn">Start Game</button>
+            </div>
 
-            <input type="text" class="input_field">
+            <!-- GAME AREA -->
+            <div class="gameArea" id="gameArea">
 
-            <div class="contentBox">
-                <div class="typingText">
-                    <p id="paragraph"></p>
-                </div>
+                <input type="text" class="input_field">
 
-                <div class="content">
-                    <ul class="result">
-                        <li>
-                            <p>Time: <span id="time">60</span>s</p>
-                        </li>
-                        <li>
-                            <p>Mistakes: <span id="mistakes">0</span></p>
-                        </li>
-                        <li>
-                            <p>WPM: <span id="wpm">0</span></p>
-                        </li>
-                    </ul>
+                <div class="contentBox">
 
-                    <button>Restart</button>
+                    <div class="typingText">
+                        <p id="paragraph"></p>
+                    </div>
+
+                    <div class="content">
+                        <ul class="result">
+                            <li>
+                                <p>Time: <span id="time">60</span>s</p>
+                            </li>
+
+                            <li>
+                                <p>Mistakes: <span id="mistakes">0</span></p>
+                            </li>
+
+                            <li>
+                                <p>WPM: <span id="wpm">0</span></p>
+                            </li>
+                        </ul>
+
+                        <button id="restartBtn">Restart</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- GAME OVER SCREEN -->
+            <div class="gameOverScreen" id="gameOverScreen">
+                <h1>Time's Up!</h1>
+
+                <p>WPM: <span id="finalWpm"></span></p>
+                <p>Mistakes: <span id="finalMistakes"></span></p>
+
+                <button id="playAgainBtn">Play Again</button>
+            </div>
+
         </div>
-    </div>
 </body>
 
 </html>

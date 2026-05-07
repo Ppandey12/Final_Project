@@ -8,53 +8,63 @@ const paragraphs = [
     "steady rhythm silent forest drifting clouds distant voices soft earth endless horizon quiet night calm wind moving waves steady breath glowing ember wandering soul quiet echo endless dream soft light calm river hidden valley drifting sky gentle waves steady rhythm distant mountains calm ocean wandering thoughts silent breeze endless road soft shadow quiet forest steady breath calm wind glowing light open horizon endless journey drifting leaves quiet night gentle rain calm river steady rhythm distant valley soft earth wandering soul quiet echo endless sky calm ocean moving waves hidden truth steady breath glowing ember soft light distant voices calm shadow drifting clouds gentle waves quiet forest endless dream steady rhythm calm wind wandering thoughts silent breeze open path distant horizon calm river soft shadow endless journey quiet night drifting sky gentle echo steady breath glowing light calm ocean wandering soul soft earth endless road quiet mind steady rhythm distant valley calm forest drifting leaves gentle rain soft light endless sky quiet echo calm wind moving waves hidden valley steady breath wandering thoughts silent night glowing ember endless journey calm river distant mountains steady rhythm quiet ocean drifting clouds soft shadow gentle waves calm sky wandering soul steady breath endless dream quiet forest glowing light open horizon drifting leaves calm wind distant voices steady rhythm soft earth quiet night endless road calm river moving waves hidden truth steady breath gentle rain wandering thoughts calm ocean silent breeze distant valley soft shadow endless sky quiet echo steady rhythm glowing ember calm forest drifting clouds wandering soul soft light endless journey quiet night gentle waves steady breath calm river distant mountains silent sky soft wind open horizon endless journey quiet ocean wandering thoughts steady breath calm shadow glowing ember distant dream soft light gentle rain endless road drifting clouds quiet forest calm wind hidden truth soft earth steady rhythm wandering soul endless sky quiet night gentle echo calm river moving waves distant valley silent breeze drifting leaves soft shadow calm ocean steady breath glowing light endless journey quiet mind wandering thoughts gentle rain calm sky open path"
 ];
 
+
 const typingText = document.querySelector('.typingText p');
 const inpField = document.querySelector('.input_field');
-const tryAgainBtn = document.querySelector(".content button");
+
+const restartBtn = document.querySelector("#restartBtn");
+const startBtn = document.querySelector("#startBtn");
+const playAgainBtn = document.querySelector("#playAgainBtn");
 
 const timeTag = document.querySelector('#time');
 const mistakeTag = document.querySelector('#mistakes');
 const wpmTag = document.querySelector('#wpm');
 
+const startScreen = document.querySelector("#startScreen");
+const gameArea = document.querySelector("#gameArea");
+const gameOverScreen = document.querySelector("#gameOverScreen");
 
-let timer = null;
-let maxTime = 60;
+const finalWpm = document.querySelector("#finalWpm");
+const finalMistakes = document.querySelector("#finalMistakes");
+
+let timer;
+let maxTime = 5;
 let timeLeft = maxTime;
 let charIndex = 0;
 let mistakes = 0;
 let isTyping = false;
 
-// Load random paragraph
 function loadParagraph() {
-    const ranIndex = Math.floor(Math.random() * paragraphs.length);
-    typingText.innerHTML = "";
 
-    paragraphs[ranIndex].split("").forEach(char => {
-        const span = `<span>${char}</span>`;
-        typingText.innerHTML += span;
-    });
+    const ranIndex = Math.floor(Math.random() * paragraphs.length);
+
+    const spans = paragraphs[ranIndex]
+        .split("")
+        .map(char => `<span>${char}</span>`)
+        .join("");
+
+    typingText.innerHTML = spans;
 
     typingText.querySelector("span").classList.add("active");
 }
 
-// Timer function
 function initTimer() {
+
     if (timeLeft > 0) {
         timeLeft--;
         timeTag.innerText = timeLeft;
     } else {
-        clearInterval(timer);
+        endGame();
     }
 }
 
-// Typing logic
 function initTyping() {
+
     const characters = typingText.querySelectorAll("span");
     const typedChar = inpField.value[charIndex];
 
     if (charIndex < characters.length && timeLeft > 0) {
 
-        // Start timer once
         if (!isTyping) {
             timer = setInterval(initTimer, 1000);
             isTyping = true;
@@ -62,7 +72,6 @@ function initTyping() {
 
         if (typedChar == null) return;
 
-        // Correct vs incorrect
         if (characters[charIndex].innerText === typedChar) {
             characters[charIndex].classList.add("correct");
         } else {
@@ -72,14 +81,20 @@ function initTyping() {
 
         charIndex++;
 
-        // Update active character
         characters.forEach(span => span.classList.remove("active"));
+
         if (characters[charIndex]) {
             characters[charIndex].classList.add("active");
+
+            // AUTO SCROLL
+            characters[charIndex].scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
         }
 
-        // Calculate WPM safely
         let timeSpent = maxTime - timeLeft;
+
         let wpm = timeSpent > 0
             ? Math.round(((charIndex - mistakes) / 5) / timeSpent * 60)
             : 0;
@@ -88,12 +103,47 @@ function initTyping() {
         mistakeTag.innerText = mistakes;
 
     } else {
-        clearInterval(timer);
+        endGame();
     }
 }
 
-// Reset game
+function startGame() {
+
+    startScreen.style.display = "none";
+    gameOverScreen.style.display = "none";
+
+    gameArea.style.display = "block";
+
+    resetGame();
+
+    inpField.focus();
+}
+
+function endGame() {
+
+    clearInterval(timer);
+
+    gameArea.style.display = "none";
+    gameOverScreen.style.display = "block";
+
+    finalWpm.innerText = wpmTag.innerText;
+    finalMistakes.innerText = mistakes;
+    fetch("/save-typing-score", {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            wpm: parseInt(wpmTag.innerText),
+            mistakes: mistakes
+        })
+    });
+}
+
 function resetGame() {
+
     clearInterval(timer);
 
     timeLeft = maxTime;
@@ -102,19 +152,22 @@ function resetGame() {
     isTyping = false;
 
     inpField.value = "";
+
     timeTag.innerText = timeLeft;
     wpmTag.innerText = 0;
     mistakeTag.innerText = 0;
-    // if (cpmTag) cpmTag.innerText = 0;
 
     loadParagraph();
 }
 
-// Focus input (only once, not inside load)
 document.addEventListener("keydown", () => inpField.focus());
+
 typingText.addEventListener("click", () => inpField.focus());
 
-// Init
-loadParagraph();
 inpField.addEventListener("input", initTyping);
-tryAgainBtn.addEventListener("click", resetGame);
+
+restartBtn.addEventListener("click", resetGame);
+
+startBtn.addEventListener("click", startGame);
+
+playAgainBtn.addEventListener("click", startGame);

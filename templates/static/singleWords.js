@@ -80,6 +80,7 @@ function gameOver() {
         <h1>Time ran out</h1>
         <p>Your final score is ${score}</p>
         <button onclick="location.reload()">Reload</button>
+        <button onclick="window.location.href='/leaderboard'"> Leaderboard </button>
     `;
 
     endgameEl.style.display = "flex";
@@ -91,7 +92,7 @@ function gameOver() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            game_name: "speed typer",
+            game_name: "Score ",
             score: score
         })
     });

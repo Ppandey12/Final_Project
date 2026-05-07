@@ -256,6 +256,45 @@ li:not(:first-child) span {
     font-weight: 500;
 }
 
+.typingText {
+    height: 250px;
+    overflow-y: auto;
+    border: 2px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.typingText p {
+    line-height: 35px;
+    font-size: 22px;
+}
+
+/* hide game at start */
+.gameArea {
+    display: none;
+}
+
+/* hide game over screen */
+.gameOverScreen {
+    display: none;
+}
+
+.startScreen,
+.gameOverScreen {
+    text-align: center;
+    padding: 40px;
+    color: white;
+}
+
+.startScreen button,
+.gameOverScreen button,
+#restartBtn {
+    padding: 12px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 
 
 /* Single word css */
@@ -377,4 +416,80 @@ li:not(:first-child) span {
 
 .startBtn:hover {
     transform: scale(1.05);
+}
+
+
+/*  Learder Board CSS  */
+.beaderboardsContianer {
+    width: 90%;
+    margin: 40px auto;
+}
+
+/* Main Leaderboard title */
+.beaderboardsContianer>h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+/* Holds both leaderboard boxes side by side */
+.beaderboardsContianer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    /* border: 2px solid black; */
+}
+
+/* Keep the top h1 full width */
+.beaderboardsContianer>h1 {
+    width: 100%;
+}
+
+/* Individual leaderboard boxes */
+.typingGame,
+.speedGame {
+    background-color: #f4f4f4;
+    width: 450px;
+    min-height: 600px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Box titles */
+.typingGame h1,
+.speedGame h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Score list */
+.speedGame ul,
+.typingGame ul {
+    list-style: none;
+    padding: 0;
+}
+
+.speedGame li,
+.typingGame li {
+    background: white;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+
+.leaderboardDelete {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.leaderboardDelete:hover {
+    opacity: 0.8;
 }

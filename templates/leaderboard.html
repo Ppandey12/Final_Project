@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
     <script src="/static/singleWords.js" defer></script>
+    <script src="/static/script.js" defer></script>
     <title>Leaderboard</title>
 </head>
 
@@ -14,19 +15,64 @@
 
         <div class="home">
             <a href="/homepage"><button class="playbutton">homepage</button></a>
+            <a href="/typinggame"><button class="playbutton">Typing Game</button></a>
+            <a href="/singleword"><button class="playbutton">Speed Typing</button></a>
+        </div>
+    </div>
+
+
+
+    <div class="beaderboardsContianer">
+        <h1>Leaderboard</h1>
+
+
+        <div class="typingGame">
+            <h1>Typing Game Leaderboard</h1>
+
+            {% if typing_scores %}
+            <ul>
+                {% for t in typing_scores %}
+                <li>
+                    WPM: {{ t.wpm }} |
+                    Mistakes: {{ t.mistakes }} |
+                     Date: {{ t.created_at.strftime('%Y-%m-%d') }}
+
+                    <form action="/delete-typing-score/{{ t.id }}" method="POST" style="display:inline;">
+                        <button class="leaderboardDelete" type="submit">
+                            Delete
+                        </button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No typing scores yet</p>
+            {% endif %}
         </div>
 
 
-        <h1>Leaderboard</h1>
 
-        <ul>
-            {% for s in scores %}
-            <li>{{ s.game_name }} - {{ s.score }}</li>
-            {% endfor %}
-        </ul>
+        <div class="speedGame">
+            <h1>Speed Game Leaderboard</h1>
+            <ul>
+                {% for s in scores %}
+                <li>
+                    Score: {{ s.score }} | Date: {{ s.created_at.strftime('%Y-%m-%d') }}
 
+                    <form action="/delete-score/{{ s.id }}" method="POST" style="display:inline;">
+                        <button class="leaderboardDelete" type="submit">Delete</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
 
+        </div>
     </div>
+
+
+
+
+
 </body>
 
 </html>
