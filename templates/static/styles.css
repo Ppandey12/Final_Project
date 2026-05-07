@@ -255,3 +255,126 @@ li span b {
 li:not(:first-child) span {
     font-weight: 500;
 }
+
+
+
+/* Single word css */
+
+.singlewordBody {
+    background-color: #402c50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Singlecontainer {
+    background-color: #43345e;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    position: relative;
+    text-align: center;
+    height: 300px;
+    width: 700px;
+}
+
+
+.singleh2 {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 0 20px;
+}
+
+#word {
+    margin: 0;
+}
+
+.singleInput {
+    border: 0;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 300px;
+    padding: 12px 20px;
+    margin-top: 10px;
+}
+
+.timecontainer {
+    margin-top: 8px;
+    font-size: 25px;
+}
+
+.scorecontainer {
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.endgamecontainer {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+.endgamecontainer h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.endgamecontainer p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.endgamecontainer button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    background-color: #4CAF50;
+    color: white;
+
+    transition: 0.3s;
+}
+
+.endgamecontainer button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+
+.startBtn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    background: #4CAF50;
+    color: white;
+
+    transition: 0.3s;
+}
+
+.startBtn:hover {
+    transform: scale(1.05);
+}

@@ -5,15 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/singleWords.js" defer></script>
     <title>Single word Game</title>
 </head>
 
-<body>
+<body class="singlewordBody">
     <div class="page">
 
         <div class="home">
             <a href="/homepage"><button class="playbutton">homepage</button></a>
         </div>
+
+
+
+        <div class="Singlewrapper">
+
+
+            <div class="Singlecontainer">
+                <h2 class="singleh2"> Speed Typer </h2>
+                <button id="startBtn" class="startBtn">Play</button>
+
+
+                <h1 id="word"></h1>
+
+                <input type="text" class="singleInput" id="text" autocomplete="off" placeholder="Type the word here..."
+                    autofocus />
+
+                <p class="timecontainer">Time left: <span id="time">60s</span></p>
+
+                <p class="scorecontainer">Score: <span id="score">0</span></p>
+
+                <div id="endgamecontainer" class="endgamecontainer"></div>
+            </div>
+
+        </div>
+
+
     </div>
 </body>
 

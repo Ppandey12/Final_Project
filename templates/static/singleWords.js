@@ -1,4 +1,10 @@
 
+const word = document.getElementById("word");
+const text = document.getElementById("text");
+const scoreEl = document.getElementById("score");
+const timeEl = document.getElementById("time");
+const endgameEl = document.getElementById("endgamecontainer");
+
 
 const words = [
     "apple", "banana", "orange", "grape", "mango", "peach", "pear", "plum", "cherry", "berry",
@@ -14,7 +20,7 @@ const words = [
     "play", "work", "study", "build", "create", "draw", "paint", "sing", "dance", "listen",
     "music", "sound", "light", "water", "fire", "earth", "air", "wind", "rain", "snow",
     "cloud", "storm", "sun", "moon", "star", "sky", "tree", "flower", "grass", "leaf",
-    "river", "lake", "ocean", "mountain", "valley", "island", "forest", "desert", "beach", "field", 
+    "river", "lake", "ocean", "mountain", "valley", "island", "forest", "desert", "beach", "field",
     "algorithm", "variable", "function", "object", "array",
     "string", "boolean", "integer", "recursion", "iteration",
     "asynchronous", "synchronous", "promise", "callback", "database",
@@ -37,3 +43,62 @@ const words = [
     "client", "browser", "runtime", "environment", "development",
     "production", "staging", "testing", "unittest", "integrationtest",
 ]
+
+
+let randomWord;
+let score = 0;
+let time = 60;
+let timeInterval;
+
+function getRandomWord() {
+    return words[Math.floor(Math.random() * words.length)];
+}
+
+function addWordToDOM() {
+    randomWord = getRandomWord();
+    word.innerHTML = randomWord;
+}
+
+function updateScore() {
+    score++;
+    scoreEl.innerHTML = score;
+}
+
+function updateTime() {
+    time--;
+    timeEl.innerHTML = time + "s";
+
+    if (time === 0) {
+        clearInterval(timeInterval);
+        gameOver();
+    }
+}
+
+function gameOver() {
+    endgameEl.innerHTML = `
+        <h1>Time ran out</h1>
+        <p>Your final score is ${score}</p>
+        <button onclick="location.reload()">Reload</button>
+    `;
+
+    endgameEl.style.display = "flex";
+}
+
+text.addEventListener("input", (e) => {
+    if (e.target.value === randomWord) {
+        updateScore();
+        addWordToDOM();
+
+        e.target.value = "";
+    }
+});
+
+startBtn.addEventListener("click", () => {
+    addWordToDOM();
+
+    text.focus();
+
+    timeInterval = setInterval(updateTime, 1000);
+
+    startBtn.style.display = "none";
+});
