@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
-     <script src="/static/singleWords.js" defer></script>
+    <script src="/static/singleWords.js" defer></script>
     <title>Leaderboard</title>
 </head>
 
@@ -15,6 +15,15 @@
         <div class="home">
             <a href="/homepage"><button class="playbutton">homepage</button></a>
         </div>
+
+
+        <h1>Leaderboard</h1>
+
+        <ul>
+            {% for s in scores %}
+            <li>{{ s.game_name }} - {{ s.score }}</li>
+            {% endfor %}
+        </ul>
 
 
     </div>

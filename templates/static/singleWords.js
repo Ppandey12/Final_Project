@@ -4,6 +4,7 @@ const text = document.getElementById("text");
 const scoreEl = document.getElementById("score");
 const timeEl = document.getElementById("time");
 const endgameEl = document.getElementById("endgamecontainer");
+const startBtn = document.getElementById("startBtn");
 
 
 const words = [
@@ -47,7 +48,7 @@ const words = [
 
 let randomWord;
 let score = 0;
-let time = 60;
+let time = 10;
 let timeInterval;
 
 function getRandomWord() {
@@ -82,6 +83,20 @@ function gameOver() {
     `;
 
     endgameEl.style.display = "flex";
+
+    // SEND SCORE TO BACKEND
+    fetch("/save-score", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            game_name: "speed typer",
+            score: score
+        })
+    });
+
+
 }
 
 text.addEventListener("input", (e) => {
