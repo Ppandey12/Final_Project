@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timezone
 
 app = Flask(
     __name__,
@@ -19,14 +19,14 @@ class Score(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     game_name = db.Column(db.String(50), nullable=False)
     score = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class TypingGameScore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     wpm = db.Column(db.Integer, nullable=False)
     mistakes = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 # Create tables
