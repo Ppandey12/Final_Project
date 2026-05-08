@@ -17,3 +17,27 @@ to play and play again, I also had to change the lay out for the sentence to be 
 5. Run the application using `python app.py`.
 6. Run the tests using `pytest test.py`.
 7. Open a web browser and navigate to `http://127.0.0:8000
+
+
+# What I have for this project:
+
+### Frontend:
+- HTML templates for the home page, typing game, and leaderboard.
+- CSS for styling the application.
+- JavaScript for handling the game logic, including timing, scoring, and updating the leaderboard.
+- A Flask application with two typing games: speed typing and mistake typing.
+
+### Backend:
+- Flask application with routes for the home page, typing game, leaderboard, and score deletion.
+- SQLAlchemy models for storing typing game scores in a SQLite database.
+- Functionality to add new scores to the database and retrieve scores for the leaderboard.
+- Error handling for score deletion.
+
+### Testing:
+- Unit tests for the Flask application using pytest to ensure that routes are working correctly and that scores are being added and deleted from the database as expected.
+
+### Documentation:
+- A README file that explains what the project does, how it was built, challenges faced, and instructions on how to run the project.
+
+### Dependencies:
+- pip-installable Python package which are listed in the requirements.txt file
