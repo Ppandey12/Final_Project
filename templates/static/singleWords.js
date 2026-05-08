@@ -48,7 +48,7 @@ const words = [
 
 let randomWord;
 let score = 0;
-let time = 10;
+let time = 60;
 let timeInterval;
 
 function getRandomWord() {

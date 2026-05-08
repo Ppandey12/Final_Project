@@ -28,7 +28,7 @@ const finalWpm = document.querySelector("#finalWpm");
 const finalMistakes = document.querySelector("#finalMistakes");
 
 let timer;
-let maxTime = 5;
+let maxTime = 60;
 let timeLeft = maxTime;
 let charIndex = 0;
 let mistakes = 0;
